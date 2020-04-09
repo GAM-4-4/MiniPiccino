@@ -10,7 +10,7 @@ canvas {
 </style>
 </head>
 <body onload="startGame()">
-<button onclick="myButton()"> Reset </button>
+<button onclick="myButton()"> Reset </button>n <!-- resetira igricu -->
 <script>
 
 function myButton(){
@@ -22,12 +22,12 @@ var myObstacles = [];
 var myScore;
 
 function startGame() {
-    myGamePiece = new component(10, 30, "red", 135, 480); 
-    myScore = new component("30px", "Consolas", "black", 100, 40, "text");
+    myGamePiece = new component(10, 30, "red", 135, 480); // oblikujemo predmet
+    myScore = new component("30px", "Consolas", "black", 100, 40, "text"); // oblikujemo gdje stoji rezultat
     myGameArea.start();
 }
 
-var myGameArea = {
+var myGameArea = {      // započinjemo postavljanjem prozora gdje će se sve odvijati
     canvas : document.createElement("canvas"),
     start : function() {
         this.canvas.width = 270;
@@ -42,7 +42,7 @@ var myGameArea = {
     }
 }
 
-function component(width, height, color, x, y, type) {
+function component(width, height, color, x, y, type) {  //funkcija gdje određujemo gravitaciju u prozoru, početni score i boje
     this.type = type;
     this.score = 0;
     this.width = width;
@@ -62,11 +62,11 @@ function component(width, height, color, x, y, type) {
             ctx.fillRect(this.x, this.y, this.width, this.height);
         }
     }
-    this.newPos = function() {
+    this.newPos = function() { //mjenjanje pozicije u prozoru
         this.x += this.speedX;
         this.y += this.speedY;
     }
-    this.crashWith = function(otherobj) {
+    this.crashWith = function(otherobj) { // kad se zabijemo u predmet
         var myleft = this.x;
         var myright = this.x + (this.width);
         var mytop = this.y;
@@ -83,7 +83,7 @@ function component(width, height, color, x, y, type) {
     }
 }
 
-function updateGameArea() {
+function updateGameArea(){.     //funkcija za postavljanje predmeta u labirintu
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < myObstacles.length; i += 1) {
         if (myGamePiece.crashWith(myObstacles[i])) {
@@ -107,7 +107,7 @@ function updateGameArea() {
         myObstacles[i].y += 1;
         myObstacles[i].update();
     }
-    myScore.text="SCORE: " + myGameArea.frameNo;
+    myScore.text="SCORE: " + myGameArea.frameNo; //kako se povećava rezultat
     myScore.update();
     myGamePiece.newPos();
     myGamePiece.update();
@@ -118,20 +118,17 @@ function everyinterval(n) {
     return false;
 }
 
-function desno(){
+function desno(){ //funkcija za kretanje udesno
     myGamePiece.speedX +=2;
 }
-function levo(){
+function levo(){  //funkcija za kretanje ulijevo
     myGamePiece.speedX -=2;
 }
-function stani(){
-    myGamePiece.speedX=0
-    myGamePiece.speedY=0
-}
+
 </script>
 
 
-<button onmousedown="levo()" onmouseup="stani()" ontouchstart="levo()">LEVO</button>
+<button onmousedown="levo()" onmouseup="stani()" ontouchstart="levo()">LEVO</button> <!--postavljanje funkcija u gumbe-->
 <button onmousedown="desno()" onmouseup="stani()" ontouchstart="desno()">DESNO</button>
 
 </body>
