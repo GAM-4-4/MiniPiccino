@@ -1,0 +1,2 @@
+# MiniPiccino
+Naša je grupa za zadatak imala napraviti rad pomoću programskog jezika JavaScript. Odlučili smo se za izradu igrice koja se sastoji od kvadrata koji prolazi kroz labirint u kojem se postupno  povećava  broj prepreka čime igra postaje sve zahtjevnija svakim prijeđenim levelom. Sama je baza igrice završena (kvadrat prolazi kroz labirint), ali trenutno naš tim programera radi na oblikovanju veličina prepreka i učestalosti njihova pojavljivanja kako bi igrica bila što uzbudljivija za igranje.
