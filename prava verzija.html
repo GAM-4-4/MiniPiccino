@@ -13,7 +13,7 @@ canvas {
 <button onclick="myButton()"> Reset </button>n <!-- resetira igricu -->
 <script>
 
-function myButton(){
+function myButton(){ //resetira igricu
 location.reload();
 }
 
@@ -124,7 +124,10 @@ function desno(){ //funkcija za kretanje udesno
 function levo(){  //funkcija za kretanje ulijevo
     myGamePiece.speedX -=2;
 }
-
+function stani(){  //funkcija da se zaustavi i kreće lijevo/desno lagano, a ne da "lijeta"
+    myGamePiece.speedX=0
+    myGamePiece.speedY=0
+} 
 </script>
 
 
