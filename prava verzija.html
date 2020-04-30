@@ -5,7 +5,7 @@
 <style>
 canvas {
     border:1px solid black;
-    background-color: white;
+    background-color: #DFF4FF;
 }
 </style>
 </head>
@@ -15,7 +15,7 @@ canvas {
 <script>
 
 function myButton(){
-location.reload();
+	location.reload();
 }
 
 var myGamePiece;
@@ -23,9 +23,8 @@ var myObstacles = [];
 var myScore;
 
 function startGame() {
-	x = 150;
-    myGamePiece = new component(10, 10, "red", x, 400); // oblikujemo predmet
-    myScore = new component("30px", "Consolas", "black", 10, 40, "text"); // oblikujemo gdje stoji rezultat
+    myGamePiece = new component(10, 10, "red", 150, 400); // oblikujemo predmet
+    myScore = new component("30px", "Consolas", "red", 10, 40, "text"); // oblikujemo gdje stoji rezultat
     myGameArea.start();
 }
 
@@ -95,12 +94,18 @@ function updateGameArea(){     //funkcija za postavljanje predmeta u labirintu
     myGameArea.clear();
     myGameArea.frameNo += 1;
     if (myGameArea.frameNo == 1 || everyinterval(150)) {
-        x1 = Math.floor(Math.random()*(140));
-		x2 = Math.floor(Math.random()*(140));       
+        x1 = Math.floor(Math.random()*100);
+		x2 = Math.floor(Math.random()*100);    
+		x3 = Math.floor(Math.random()*100);      		
+		x11 = Math.floor(Math.random()*300);
+		x21 = Math.floor(Math.random()*300);    
+		x31 = Math.floor(Math.random()*300);   		
 		gap = 60
-        myObstacles.push(new component(140, 10, "green", x1, gap));
-        myObstacles.push(new component(140, 10, "blue", x2, gap));
+        myObstacles.push(new component(x1, 10, "#005BFF", x11, gap));
+        myObstacles.push(new component(x2, 10, "#005BFF", x21, gap));
+		myObstacles.push(new component(x3, 10, "#005BFF", x31, gap));
     }
+	
     for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].y += 1;
         myObstacles[i].update();
@@ -115,7 +120,6 @@ function everyinterval(n) {
     if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
     return false;
 }
-
 
 function desno () {  //funkcija za kretanje udesno
 	myGamePiece.x +=3;
@@ -135,11 +139,6 @@ document.onkeydown = function(event) {   //funkcija da se koriste tipke na tipko
             desno();
             break;
     }
-}
-
-function stani(){  //funkcija da se zaustavi 
-    myGamePiece.speedX=0;
-    myGamePiece.speedY=0;
 }
 
 </script>
