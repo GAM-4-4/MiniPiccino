@@ -10,10 +10,11 @@ canvas {
 </style>
 </head>
 <body onload="startGame()">
-<button onclick="myButton()"> Reset </button>n <!-- resetira igricu -->
+<button onclick="myButton()"> Reset </button> <!-- resetira igricu -->
+
 <script>
 
-function myButton(){ //resetira igricu
+function myButton(){
 location.reload();
 }
 
@@ -22,15 +23,16 @@ var myObstacles = [];
 var myScore;
 
 function startGame() {
-    myGamePiece = new component(10, 30, "red", 135, 480); // oblikujemo predmet
-    myScore = new component("30px", "Consolas", "black", 100, 40, "text"); // oblikujemo gdje stoji rezultat
+	x = 150;
+    myGamePiece = new component(10, 10, "red", x, 400); // oblikujemo predmet
+    myScore = new component("30px", "Consolas", "black", 10, 40, "text"); // oblikujemo gdje stoji rezultat
     myGameArea.start();
 }
 
 var myGameArea = {      // započinjemo postavljanjem prozora gdje će se sve odvijati
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 270;
+        this.canvas.width = 300;
         this.canvas.height = 480;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
@@ -48,7 +50,7 @@ function component(width, height, color, x, y, type) {  //funkcija gdje određuj
     this.width = width;
     this.height = height;
     this.speedX = 0;
-    this.speedY = -0.5;    
+    this.speedY = 0;    
     this.x = x;
     this.y = y;
     this.update = function() {
@@ -83,7 +85,7 @@ function component(width, height, color, x, y, type) {  //funkcija gdje određuj
     }
 }
 
-function updateGameArea(){.     //funkcija za postavljanje predmeta u labirintu
+function updateGameArea(){     //funkcija za postavljanje predmeta u labirintu
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < myObstacles.length; i += 1) {
         if (myGamePiece.crashWith(myObstacles[i])) {
@@ -93,21 +95,17 @@ function updateGameArea(){.     //funkcija za postavljanje predmeta u labirintu
     myGameArea.clear();
     myGameArea.frameNo += 1;
     if (myGameArea.frameNo == 1 || everyinterval(150)) {
-        x = myGameArea.canvas.width;
-        minWidth= 10;
-        maxWidth = 100;
-        width = Math.floor(Math.random()*(maxWidth-minWidth+1)+minWidth);
-        minGap = 10;
-        maxGap = 150;
-        gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-        myObstacles.push(new component(x - width - gap, 10, "green", 220, (width + gap)));
-        myObstacles.push(new component(x - width - gap, 10 , "green", 0, width + gap));
+        x1 = Math.floor(Math.random()*(140));
+		x2 = Math.floor(Math.random()*(140));       
+		gap = 60
+        myObstacles.push(new component(140, 10, "green", x1, gap));
+        myObstacles.push(new component(140, 10, "blue", x2, gap));
     }
     for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].y += 1;
         myObstacles[i].update();
     }
-    myScore.text="SCORE: " + myGameArea.frameNo; //kako se povećava rezultat
+    myScore.text="SCORE: " + myGameArea.frameNo; 
     myScore.update();
     myGamePiece.newPos();
     myGamePiece.update();
@@ -118,21 +116,33 @@ function everyinterval(n) {
     return false;
 }
 
-function desno(){ //funkcija za kretanje udesno
-    myGamePiece.speedX +=2;
+
+function desno () {  //funkcija za kretanje udesno
+	myGamePiece.x +=3;
 }
-function levo(){  //funkcija za kretanje ulijevo
-    myGamePiece.speedX -=2;
+
+function lijevo(){  //funkcija za kretanje ulijevo
+    myGamePiece.x -=3;
 }
-function stani(){  //funkcija da se zaustavi i kreće lijevo/desno lagano, a ne da "lijeta"
-    myGamePiece.speedX=0
-    myGamePiece.speedY=0
-} 
+
+document.onkeydown = function(event) {   //funkcija da se koriste tipke na tipkovnici za kretanje
+    event = event || window.event;
+    switch (event.keyCode) {
+        case 37:
+            lijevo();
+            break;
+        case 39:
+            desno();
+            break;
+    }
+}
+
+function stani(){  //funkcija da se zaustavi 
+    myGamePiece.speedX=0;
+    myGamePiece.speedY=0;
+}
+
 </script>
-
-
-<button onmousedown="levo()" onmouseup="stani()" ontouchstart="levo()">LEVO</button> <!--postavljanje funkcija u gumbe-->
-<button onmousedown="desno()" onmouseup="stani()" ontouchstart="desno()">DESNO</button>
 
 </body>
 
