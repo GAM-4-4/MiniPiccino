@@ -10,11 +10,11 @@ canvas {
 </style>
 </head>
 <body onload="startGame()">
-<button onclick="myButton()"> Reset </button> <!-- resetira igricu -->
+<button onclick="myButton()"> Reset </button> 
 
 <script>
 
-function myButton(){
+function myButton(){  //resetira igricu
 	location.reload();
 }
 
@@ -67,7 +67,7 @@ function component(width, height, color, x, y, type) {  //funkcija gdje određuj
         this.x += this.speedX;
         this.y += this.speedY;
     }
-    this.crashWith = function(otherobj) { // kad se zabijemo u predmet
+    this.crashWith = function(otherobj) { // kad se zabijemo u predmet (prestaje se gibati)
         var myleft = this.x;
         var myright = this.x + (this.width);
         var mytop = this.y;
@@ -93,7 +93,7 @@ function updateGameArea(){     //funkcija za postavljanje predmeta u labirintu
     }
     myGameArea.clear();
     myGameArea.frameNo += 1;
-    if (myGameArea.frameNo == 1 || everyinterval(100)) {
+    if (myGameArea.frameNo == 1 || everyinterval(100)) {  //oblikovanje prepreka; učestalost, boja, na random
         x1 = Math.floor(Math.random()*100);
 		x2 = Math.floor(Math.random()*100);    
 		x3 = Math.floor(Math.random()*100);      		
@@ -110,7 +110,7 @@ function updateGameArea(){     //funkcija za postavljanje predmeta u labirintu
         myObstacles[i].y += 1;
         myObstacles[i].update();
     }
-    myScore.text="SCORE: " + myGameArea.frameNo; 
+    myScore.text="SCORE: " + myGameArea.frameNo; //ažuriranje scorea
     myScore.update();
     myGamePiece.newPos();
     myGamePiece.update();
