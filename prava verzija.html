@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <style>
 canvas {
-    border:1px solid black;
+    border:4px solid red;
     background-color: #DFF4FF;
 }
 </style>
@@ -93,7 +93,7 @@ function updateGameArea(){     //funkcija za postavljanje predmeta u labirintu
     }
     myGameArea.clear();
     myGameArea.frameNo += 1;
-    if (myGameArea.frameNo == 1 || everyinterval(150)) {
+    if (myGameArea.frameNo == 1 || everyinterval(100)) {
         x1 = Math.floor(Math.random()*100);
 		x2 = Math.floor(Math.random()*100);    
 		x3 = Math.floor(Math.random()*100);      		
